@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Aashray </title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        <link rel="stylesheet" href="/stylesheets/main.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    </head>
+    <body>
+
+
+
+        <!-- Begin Navbar -->
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+            <a class="navbar-brand" href="/"> <i class="fas fa-hotel"></i> Aashray</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item <%= typeof page !== 'undefined' && page === 'hotels' ? 'active' : '' %>">
+                  <a href="/hotels" class="nav-link">Home</a>
+                </li>
+              </ul>
+              <ul class="navbar-nav">
+                  <% if(!currentUser){ %>
+                      <li class="nav-item <%= typeof page !== 'undefined' && page === 'login' ? 'active' : '' %>">
+                        <a href="/login" class="nav-link">Login</a>
+                      </li>
+                      <li class="nav-item <%= typeof page !== 'undefined' && page === 'register' ? 'active' : '' %>">
+                        <a href="/register" class="nav-link">Sign Up</a>
+                      </li>
+                  <% } else { %>
+                      <li class="nav-item">
+                        <a href="#" class="nav-link">Signed In As <%= currentUser.username %></a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="/logout" class="nav-link">Logout</a>
+                      </li>
+                  <% } %>
+              </ul>
+            </div>
+        </nav>
+        <!-- End Navbar -->  
+
+        
+        <!-- Begin flash messages-->
+        <div class="container">
+            <% if(error && error.length > 0){ %>
+                <div class="alert alert-danger text-center" role="alert">
+                    <%= error %>
+                </div>
+            <% } %>
+
+            <% if(success && success.length > 0){ %>
+            <div class="alert alert-success text-center" role="alert">
+                <%= success %>
+            <% } %>
+            </div>
+        </div>
+        <!-- End flash messages-->
+    

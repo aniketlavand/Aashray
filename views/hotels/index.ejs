@@ -1,0 +1,36 @@
+<% include ../partials/header %>
+
+<div class="container">
+    
+    <!-- Begin Jumbotron-->
+    <header class="jumbotron">
+        <div class="container">
+            <h1><span class="glyphicon glyphicon-tent"></span> Welcome To Aashray!</h1>
+            <p>View our hand-picked hotels from all over the world</p>
+            <p>
+               <a class="btn btn-primary btn-lg" href="/hotels/new">Add New Hotel</a>
+            </p>
+        </div>
+    </header>
+    <!-- End Jumbotron-->
+
+    <!-- Begin cards-->
+   <div class="row text-center" id="hotel-grid">
+        <% hotels.forEach(function(hotel){ %>
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                <div class="card">
+                <img class="card-img-top" src="<%= hotel.image %>" alt="<%= hotel.name %>">
+                <div class="card-body">
+                    <h5 class="card-title"><%= hotel.name %></h5>
+                    <a href="/hotels/<%= hotel._id %>" class="btn btn-primary">More Info</a>
+                </div>
+                </div>
+            </div>
+        <% }); %>
+    </div>
+    <!-- End Cards -->
+
+
+</div>
+
+<% include ../partials/footer %>

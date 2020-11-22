@@ -1,0 +1,68 @@
+<% include ../partials/header %>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <p class="lead">Aashray</p>
+            
+        </div>
+        <div class="col-md-9">
+            <div class="card mb-3">
+              <img class="card-img-top" src="<%= hotel.image %>" alt="<%= hotel.name %>">
+              <div class="card-body">
+                <p class="float-right">
+                  $<%= hotel.cost %>/night
+                </p>
+                <h5 class="card-title"><%= hotel.name %></h5>
+                <p>
+                  <em>Submitted by: <%= hotel.author.username %></em>
+                </p>
+                <hr>
+                <p class="card-text"><%= hotel.description %></p>
+                <% if(currentUser && hotel.author.id.equals(currentUser._id)){ %>
+                <a class="btn btn-warning" href="/hotels/<%= hotel._id %>/edit">Edit</a>
+                <form action="/hotels/<%= hotel._id %>?_method=DELETE" method="POST" class="delete-form">
+                  <button class="btn btn-danger">Delete</button>
+                </form>
+                <% } %>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-body">
+                <div class="text-right">
+                  <a class="btn btn-success" href="/hotels/<%= hotel._id %>/comments/new">Add New Comment</a>
+                </div>
+                <hr>
+                <div class="row">
+                <% hotel.comments.forEach(function(comment){ %>
+                  <div class="col-md-12 mb-2">
+                    <div class="card">
+                      <div class="card-body">
+                        <div class="float-left">
+                          <p class="card-title"><%= comment.author.username %></p>
+                          <p class="card-text"><%= comment.text %></p>
+                        </div>
+                        <div class="float-right">
+                                                    
+                          <% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
+                          <div class="float-right">
+                            <a href="/hotels/<%=hotel._id%>/comments/<%=comment._id%>/edit" class="btn btn-sm btn-warning">EDIT</a>
+                            <form class="delete-form" action="/hotels/<%=hotel._id%>/comments/<%=comment._id%>?_method=DELETE" method="POST">
+                              <button class="btn btn-sm btn-danger">DELETE</button>
+                            </form>
+                          </div>
+                          <% } %>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                <% }) %>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+</div>
+<h1></h1>
+
+
+<% include ../partials/footer %>
